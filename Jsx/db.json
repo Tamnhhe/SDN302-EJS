@@ -1,0 +1,28 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "product_name": "Laptop Dell XPS",
+      "price": 35000000,
+      "quantity": 10,
+      "category": "Laptop",
+      "supplier": "Dell Inc."
+    },
+    {
+      "id": 2,
+      "product_name": "Bàn phím cơ",
+      "price": 2500000,
+      "quantity": 50,
+      "category": "Phụ kiện",
+      "supplier": "Logitech"
+    },
+    {
+      "id": 3,
+      "product_name": "Màn hình LG 27 inch",
+      "price": 7000000,
+      "quantity": 25,
+      "category": "Màn hình",
+      "supplier": "LG Electronics"
+    }
+  ]
+}
