@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quản lý Sản phẩm</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Danh sách Sản phẩm</h1>
+      <a href="/add" class="btn btn-add">Thêm sản phẩm mới</a>
+      <table>
+        <thead>
+          <tr>
+            <th>Tên sản phẩm</th>
+            <th>Giá (VND)</th>
+            <th>Số lượng</th>
+            <th>Danh mục</th>
+            <th>Nhà cung cấp</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% products.forEach(function(product) { %>
+          <tr>
+            <td><%= product.product_name %></td>
+            <td><%= product.price.toLocaleString('vi-VN') %></td>
+            <td><%= product.quantity %></td>
+            <td><%= product.category %></td>
+            <td><%= product.supplier %></td>
+            <td>
+              <a href="/edit/<%= product.id %>" class="btn btn-edit">Sửa</a>
+              <a
+                href="/delete/<%= product.id %>"
+                class="btn btn-delete"
+                onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');"
+                >Xóa</a
+              >
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
