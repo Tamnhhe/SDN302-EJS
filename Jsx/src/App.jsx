@@ -1,8 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProductList from "./components/ProductList";
-import ProductForm from "./components/ProductForm";
-import "./App.css"; // Dùng lại CSS
+import AddProduct from "./components/AddProduct"; // Import component mới
+import EditProduct from "./components/EditProduct"; // Import component mới
+import "./App.css";
 
 function App() {
   return (
@@ -10,8 +11,10 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<ProductList />} />
-          <Route path="/add" element={<ProductForm />} />
-          <Route path="/edit/:id" element={<ProductForm />} />
+          <Route path="/add" element={<AddProduct />} />{" "}
+          {/* Route cho trang Thêm */}
+          <Route path="/edit/:id" element={<EditProduct />} />{" "}
+          {/* Route cho trang Sửa */}
         </Routes>
       </div>
     </Router>

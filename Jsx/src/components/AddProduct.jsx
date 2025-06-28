@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 const API_URL = "http://localhost:3001/products";
 
-function ProductForm() {
+function AddProduct() {
   const [product, setProduct] = useState({
     product_name: "",
     price: "",
@@ -11,19 +11,7 @@ function ProductForm() {
     category: "",
     supplier: "",
   });
-  const { id } = useParams();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (id) {
-      const fetchProduct = async () => {
-        const response = await fetch(`${API_URL}/${id}`);
-        const data = await response.json();
-        setProduct(data);
-      };
-      fetchProduct();
-    }
-  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,30 +24,26 @@ function ProductForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // JSON Server yêu cầu giá và số lượng phải là số
     const productData = {
       ...product,
       price: parseFloat(product.price),
       quantity: parseInt(product.quantity),
     };
 
-    const method = id ? "PUT" : "POST";
-    const url = id ? `${API_URL}/${id}` : API_URL;
-
-    await fetch(url, {
-      method: method,
+    await fetch(API_URL, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(productData),
     });
 
-    navigate("/");
+    navigate("/"); // Chuyển về trang chủ sau khi thêm
   };
 
   return (
     <div>
-      <h1>{id ? "Chỉnh sửa sản phẩm" : "Thêm sản phẩm mới"}</h1>
+      <h1>Thêm sản phẩm mới</h1>
       <form onSubmit={handleSubmit} className="product-form">
         <div className="form-group">
           <label>Tên sản phẩm:</label>
@@ -111,8 +95,8 @@ function ProductForm() {
             required
           />
         </div>
-        <button type="submit" className={id ? "btn btn-edit" : "btn btn-add"}>
-          {id ? "Cập nhật" : "Thêm sản phẩm"}
+        <button type="submit" className="btn btn-add">
+          Thêm sản phẩm
         </button>
         <Link to="/" className="btn btn-cancel">
           Hủy
@@ -122,4 +106,4 @@ function ProductForm() {
   );
 }
 
-export default ProductForm;
+export default AddProduct;
